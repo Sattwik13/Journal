@@ -1,11 +1,14 @@
 package com.journal.journalApp.Service;
 
+import java.util.Arrays;
 // import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 // import com.journal.journalApp.entity.journalEntry;
@@ -20,9 +23,17 @@ public class userService {
     @Autowired
     private userRepository UserRepository;
 
-    public void saveEntry(userEntry JournalEntry) {
+    private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    public void saveEntry(userEntry user) {
         // journalEntry.setData(LocalDateTime.now());
-        UserRepository.save(JournalEntry);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles(Arrays.asList("USER"));
+        UserRepository.save(user);
+    }
+
+    public void saveNewUser(userEntry user) {
+       passwordEncoder.encode(user.getPassword());
     }
 
     public List<userEntry> getAll(){
