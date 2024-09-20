@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +32,7 @@ public class journalEntryService {
             JournalEntry.setDate(LocalDateTime.now());
             journalEntry saved = JournalEntryRepository.save(JournalEntry);
             User.getJournalEntries().add(saved);
-            UserService.saveEntry(User);
+            UserService.saveUser(User);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -52,11 +53,23 @@ public class journalEntryService {
         return JournalEntryRepository.findById(id);
     }
 
-    public void deleteById(ObjectId id, String userName){
-
-        userEntry User = UserService.findByUserName(userName); 
-        User.getJournalEntries().removeIf(x-> x.getId().equals(id));
-        UserService.saveEntry(User);
-        JournalEntryRepository.deleteById(id);
+    @Transactional
+    public boolean deleteById(ObjectId id, String userName){
+        boolean removed = false;
+        try {
+            userEntry User = UserService.findByUserName(userName); 
+            removed = User.getJournalEntries().removeIf(x-> x.getId().equals(id));
+            if(removed){
+               UserService.saveUser(User);
+               JournalEntryRepository.deleteById(id);
+            }
+        } catch (Exception e) {
+            System.out.println( "An error occured while deleteing the entry"+ e.getMessage());
+           
+        }
+        return removed;
+ 
     }
+
+    
 }

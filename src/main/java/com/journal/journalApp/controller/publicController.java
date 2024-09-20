@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/public")
 public class publicController {
 
     @Autowired
@@ -25,9 +25,9 @@ public class publicController {
         return "Ok";
     }
 
-    @PostMapping
+    @PostMapping("/create-user")
     public void createUser(@RequestBody userEntry user) {
-        UserService.saveEntry(user);
+        UserService.saveNewUser(user);
     }
     
     

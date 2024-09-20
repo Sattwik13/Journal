@@ -25,15 +25,15 @@ public class userService {
 
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public void saveEntry(userEntry user) {
+    public void saveNewUser(userEntry user) {
         // journalEntry.setData(LocalDateTime.now());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Arrays.asList("USER"));
         UserRepository.save(user);
     }
 
-    public void saveNewUser(userEntry user) {
-       passwordEncoder.encode(user.getPassword());
+    public void saveUser(userEntry user) {
+       UserRepository.save(user);
     }
 
     public List<userEntry> getAll(){
