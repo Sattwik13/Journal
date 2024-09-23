@@ -1,0 +1,16 @@
+# Conversion to YAML from Properties formar report
+# Warnings:
+# - The yaml file had comments which are lost in the refactoring!
+# spring:
+#   data:
+#     mongodb:
+#       uri: mongodb+srv://sattwikmanna6359:Sattwik123@cluster0.ykbui.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+#       database: journaldb
+#       auto-index-creation: 'true'
+#   autoconfigure:
+#     exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+# server:
+#   port: 8081
+#   servlet:
+#     context-path: /journal 
