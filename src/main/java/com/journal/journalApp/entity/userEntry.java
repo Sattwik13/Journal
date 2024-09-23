@@ -11,11 +11,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mongodb.lang.NonNull;
 
-
+import lombok.Builder;
 import lombok.Data;
 
 @Document(collection = "users") // --> Document--convert mongoDb collection(users) 
 @Data // ---> Using Lombok, For automatic (getter and setter) code generate on compile time 
+@Builder
 public class userEntry {
 
     @Id
