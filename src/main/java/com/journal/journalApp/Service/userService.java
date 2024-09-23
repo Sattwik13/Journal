@@ -32,6 +32,13 @@ public class userService {
         UserRepository.save(user);
     }
 
+    public void saveAdmin(userEntry user) {
+        // journalEntry.setData(LocalDateTime.now());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles(Arrays.asList("USER","ADMIN"));
+        UserRepository.save(user);
+    }
+
     public void saveUser(userEntry user) {
        UserRepository.save(user);
     }
