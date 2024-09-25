@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.journal.journalApp.Service.userService;
+import com.journal.journalApp.Service.weatherService;
+import com.journal.journalApp.apiResponse.weatherResponse;
 import com.journal.journalApp.entity.userEntry;
 import com.journal.journalApp.repository.userRepository;
 
@@ -27,6 +29,9 @@ public class userController {
 
     @Autowired
     private userRepository UserRepository;
+
+    @Autowired
+    private weatherService WeatherService;
 
     @GetMapping
     public List<?> getAllUsers(){
@@ -57,5 +62,16 @@ public class userController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("/get")
+    public ResponseEntity<?> greeting(){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        weatherResponse WeatherResponse = WeatherService.getWeather("Mumbai");
+        String greeting = "";
+        if(WeatherResponse != null){
+            greeting = ", Weather feels like " + WeatherResponse.getCurrent().getFeelslike();
+        }
+        return new ResponseEntity<>("Hi "+ authentication.getName() + greeting, HttpStatus.OK);
+    }
 
 }
