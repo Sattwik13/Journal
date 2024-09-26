@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.journal.journalApp.Service.userService;
+import com.journal.journalApp.cache.appCache;
 import com.journal.journalApp.entity.userEntry;
 
 import java.util.List;
@@ -23,6 +24,9 @@ public class adminController {
     @Autowired
     private userService UserService;
 
+    @Autowired
+    private appCache AppCache;
+
 
     @GetMapping("/all-users") 
     public ResponseEntity<?> getAllUsers(){
@@ -37,6 +41,11 @@ public class adminController {
     @PostMapping("/create-admin-user")
     public void createUser(@RequestBody userEntry user ) {
         UserService.saveAdmin(user);
+    }
+
+    @GetMapping("/clear-app-catch")
+    public void clearAppCache() {
+        AppCache.init();
     }
     
 }
