@@ -20,3 +20,7 @@
 #     net:
 #       journal:
 #        journalApp: DEBUG  
+
+# weather:
+#   api:
+#     key: a9329f739245a9c605f97b7694ffb404
