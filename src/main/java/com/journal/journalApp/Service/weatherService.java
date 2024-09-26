@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.journal.journalApp.apiResponse.weatherResponse;
 import com.journal.journalApp.cache.appCache;
+import com.journal.journalApp.constants.placeHolder;
 
 @Component
 public class weatherService {
@@ -35,7 +36,7 @@ public class weatherService {
     // }
 
     public weatherResponse getWeather(String city){
-        String finalAPI = APP_CACHE.AppCache.get(appCache.keys.WEATHER_API.toString()).replace("<city>", city).replace("<apiKey>", apiKey);
+        String finalAPI = APP_CACHE.AppCache.get(appCache.keys.WEATHER_API.toString()).replace(placeHolder.CITY, city).replace(placeHolder.API_KEY, apiKey);
         ResponseEntity<weatherResponse> response = restTemplete.exchange(finalAPI, HttpMethod.POST, null, weatherResponse.class);
         weatherResponse body = response.getBody();
         return body;

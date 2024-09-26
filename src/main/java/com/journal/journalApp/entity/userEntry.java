@@ -11,12 +11,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mongodb.lang.NonNull;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Document(collection = "users") // --> Document--convert mongoDb collection(users) 
 @Data // ---> Using Lombok, For automatic (getter and setter) code generate on compile time 
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class userEntry {
 
     @Id
@@ -24,6 +28,8 @@ public class userEntry {
     @Indexed(unique = true) // ---> for unique userName
     @NonNull
     private String userName;
+    private String email;
+    private boolean sentimentAnalysis;
     @NonNull
     private String password;
 

@@ -23,10 +23,11 @@ public class appCache {
     @Autowired
     private configJournalAppRepository ConfigJournalAppRepository;
 
-    public Map<String, String> AppCache = new HashMap<>();
+    public Map<String, String> AppCache;
 
     @PostConstruct
     public void init() {
+        AppCache = new HashMap<>();
         List<configJournalAppEntity> all = ConfigJournalAppRepository.findAll();
         for(configJournalAppEntity ConfigJournalAppEntity : all){
             AppCache.put(ConfigJournalAppEntity.getKey(), ConfigJournalAppEntity.getValue());
