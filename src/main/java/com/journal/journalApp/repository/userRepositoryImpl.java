@@ -15,6 +15,7 @@ public class userRepositoryImpl {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    
     public List<userEntry> getUserForSentimentAnalysis() {
 
         Query query = new Query();
