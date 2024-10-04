@@ -20,8 +20,11 @@ import com.journal.journalApp.apiResponse.weatherResponse;
 import com.journal.journalApp.entity.userEntry;
 import com.journal.journalApp.repository.userRepository;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/user")
+@Tag(name = "User APIs", description = "Read, Update & Delete User")
 public class userController {
 
     @Autowired

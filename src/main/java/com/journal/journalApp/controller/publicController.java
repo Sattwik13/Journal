@@ -8,6 +8,7 @@ import com.journal.journalApp.Service.userService;
 import com.journal.journalApp.entity.userEntry;
 import com.journal.journalApp.utils.JwtUtils;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping("/public")
 @Slf4j
+@Tag(name = "Public APIs")
 public class publicController {
 
     @Autowired

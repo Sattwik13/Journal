@@ -27,11 +27,15 @@ import com.journal.journalApp.Service.userService;
 import com.journal.journalApp.entity.journalEntry;
 import com.journal.journalApp.entity.userEntry;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 
 
 @RestController
 @RequestMapping("/journal")
+@Tag(name = "Journal APIs")
 public class journalEntryControllerV2 {
 
     @Autowired
@@ -42,6 +46,7 @@ public class journalEntryControllerV2 {
 
    
     @GetMapping
+    @Operation(summary = "Get all journal entries of a user")
     public ResponseEntity<?> getAllJournalEntriesOfUser() {
 
       Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
